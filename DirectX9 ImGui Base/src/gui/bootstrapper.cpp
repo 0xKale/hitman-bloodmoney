@@ -225,6 +225,47 @@ namespace
 		return false;
 	}
 
+	inline bool menuCursorShown = false;
+
+	void UpdateMenuCursorState() noexcept
+	{
+		if (gui::open)
+		{
+			ClipCursor(nullptr);
+			if (!menuCursorShown)
+			{
+				while (ShowCursor(TRUE) < 0)
+				{
+				}
+
+				menuCursorShown = true;
+			}
+
+			return;
+		}
+
+		if (menuCursorShown)
+		{
+			while (ShowCursor(FALSE) >= 0)
+			{
+			}
+
+			menuCursorShown = false;
+		}
+	}
+
+	void ResetMenuCursorState() noexcept
+	{
+		if (menuCursorShown)
+		{
+			while (ShowCursor(FALSE) >= 0)
+			{
+			}
+
+			menuCursorShown = false;
+		}
+	}
+
 	void PollMenuInput() noexcept
 	{
 		if (window == nullptr)
@@ -233,11 +274,6 @@ namespace
 		}
 
 		ImGuiIO& io = ImGui::GetIO();
-
-		ClipCursor(nullptr);
-		while (ShowCursor(TRUE) < 0)
-		{
-		}
 
 		POINT cursorPos{};
 		if (GetCursorPos(&cursorPos) && ScreenToClient(window, &cursorPos))
@@ -395,6 +431,7 @@ void AbortOverlaySetup() noexcept
 	}
 
 	isSetup = false;
+	ResetMenuCursorState();
 }
 
 void SetupOverlay(IDirect3DDevice9* currentDevice) noexcept
@@ -476,6 +513,7 @@ void TeardownOverlay() noexcept
 	}
 
 	isSetup = false;
+	ResetMenuCursorState();
 }
 
 void Setup()
@@ -620,6 +658,8 @@ long __stdcall EndScene(IDirect3DDevice9* currentDevice) noexcept
 
 	ImGui_ImplDX9_NewFrame();
 	ImGui_ImplWin32_NewFrame();
+
+	UpdateMenuCursorState();
 
 	if (gui::open)
 	{
