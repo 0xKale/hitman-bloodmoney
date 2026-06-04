@@ -194,9 +194,62 @@ namespace
 		}
 	}
 
-	bool ShouldBlockGameKeys(const UINT message) noexcept
+	HWND ResolveGameWindow(const HWND focusWindow) noexcept
 	{
-		return message >= WM_KEYFIRST && message <= WM_KEYLAST;
+		const HWND largestWindow = FindLargestProcessWindow();
+		if (largestWindow != nullptr)
+		{
+			return largestWindow;
+		}
+
+		return focusWindow;
+	}
+
+	bool ShouldBlockGameInput(const UINT message) noexcept
+	{
+		if (message >= WM_MOUSEFIRST && message <= WM_MOUSELAST)
+		{
+			return true;
+		}
+
+		if (message == WM_MOUSEWHEEL || message == WM_MOUSEHWHEEL)
+		{
+			return true;
+		}
+
+		if (message >= WM_KEYFIRST && message <= WM_KEYLAST)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	void PollMenuInput() noexcept
+	{
+		if (window == nullptr)
+		{
+			return;
+		}
+
+		ImGuiIO& io = ImGui::GetIO();
+
+		ClipCursor(nullptr);
+		while (ShowCursor(TRUE) < 0)
+		{
+		}
+
+		POINT cursorPos{};
+		if (GetCursorPos(&cursorPos) && ScreenToClient(window, &cursorPos))
+		{
+			io.AddMousePosEvent(
+				static_cast<float>(cursorPos.x),
+				static_cast<float>(cursorPos.y));
+		}
+
+		io.AddMouseButtonEvent(0, (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0);
+		io.AddMouseButtonEvent(1, (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0);
+		io.AddMouseButtonEvent(2, (GetAsyncKeyState(VK_MBUTTON) & 0x8000) != 0);
 	}
 }
 
@@ -288,7 +341,7 @@ bool EnsureDeviceBinding(IDirect3DDevice9* currentDevice) noexcept
 		return false;
 	}
 
-	if (!TryReattachWindow(creationParams.hFocusWindow))
+	if (!TryReattachWindow(ResolveGameWindow(creationParams.hFocusWindow)))
 	{
 		return false;
 	}
@@ -357,7 +410,7 @@ void SetupOverlay(IDirect3DDevice9* currentDevice) noexcept
 		return;
 	}
 
-	window = creationParams.hFocusWindow;
+	window = ResolveGameWindow(creationParams.hFocusWindow);
 	if (window == nullptr)
 	{
 		return;
@@ -437,8 +490,6 @@ void Setup()
 	{
 		throw std::runtime_error("Timed out waiting for d3d9.dll");
 	}
-
-	(void)FindLargestProcessWindow();
 
 	IDirect3DDevice9* probeDevice = nullptr;
 	bool probeCreated = false;
@@ -562,14 +613,24 @@ long __stdcall EndScene(IDirect3DDevice9* currentDevice) noexcept
 		return result;
 	}
 
+	if (GetAsyncKeyState(VK_INSERT) & 1)
+	{
+		gui::open = !gui::open;
+	}
+
 	ImGui_ImplDX9_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 
-	ImGuiIO& io = ImGui::GetIO();
-	io.WantCaptureKeyboard = gui::open;
-	io.MouseDrawCursor = gui::open;
+	if (gui::open)
+	{
+		PollMenuInput();
+		ImGui::SetNextFrameWantCaptureMouse(true);
+		ImGui::SetNextFrameWantCaptureKeyboard(true);
+	}
 
 	ImGui::NewFrame();
+
+	ImGui::GetIO().MouseDrawCursor = gui::open;
 
 	if (gui::open)
 	{
@@ -604,25 +665,15 @@ LRESULT CALLBACK WindowProcess(
 		return DefWindowProc(hwnd, message, wideParam, longParam);
 	}
 
-	if (message == WM_KEYDOWN && wideParam == VK_INSERT)
-	{
-		gui::open = !gui::open;
-	}
-
 	if (gui::open && ImGui::GetCurrentContext() != nullptr)
 	{
-		const LRESULT imguiResult = ImGui_ImplWin32_WndProcHandler(
+		ImGui_ImplWin32_WndProcHandler(
 			hwnd,
 			message,
 			wideParam,
 			longParam);
 
-		if (imguiResult != 0)
-		{
-			return imguiResult;
-		}
-
-		if (ShouldBlockGameKeys(message))
+		if (ShouldBlockGameInput(message))
 		{
 			return 0;
 		}
