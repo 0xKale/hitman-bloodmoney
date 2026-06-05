@@ -1,16 +1,16 @@
 #include "../pages.hpp"
 #include "player.hpp"
 
-#include "../../../project/functions.hpp"
+#include "../../../game/cheats.hpp"
 
 namespace gui::pages
 {
 	void RenderPlayer() noexcept
 	{
-		ImGui::Checkbox("Debug Menu", &vars::bDebugMenu);
+		ImGui::Checkbox("Enable Cheat Menu (C)", &vars::cheatMenu);
 		if (ImGui::IsItemDeactivatedAfterEdit())
 		{
-			functions::cheatEnableMenu();
+			game::SetCheatsMenuEnabled(vars::cheatMenu);
 		}
 
 		ImGui::Checkbox("God Mode", &vars::bGodMode);

@@ -61,7 +61,9 @@
     <ClInclude Include="ext\minhook\minhook.h" />
     <ClInclude Include="ext\minhook\trampoline.h" />
     <ClInclude Include="ext\mINI\ini.h" />
+    <ClInclude Include="src\game\cheats.hpp" />
     <ClInclude Include="src\game\hooks.hpp" />
+    <ClInclude Include="src\game\memory.hpp" />
     <ClInclude Include="src\game\offsets.hpp" />
     <ClInclude Include="src\game\structs.hpp" />
     <ClInclude Include="src\gui\bootstrapper.hpp" />
@@ -92,6 +94,7 @@
     <ClCompile Include="src\gui\pages\misc\misc.cpp" />
     <ClCompile Include="src\gui\pages\player\player.cpp" />
     <ClCompile Include="src\gui\pages\visuals\visuals.cpp" />
+    <ClCompile Include="src\game\cheats.cpp" />
     <ClCompile Include="src\game\hooks.cpp" />
     <ClCompile Include="src\game\offsets.cpp" />
     <ClCompile Include="src\game\structs.cpp" />

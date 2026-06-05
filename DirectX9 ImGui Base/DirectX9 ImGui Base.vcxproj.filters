@@ -95,7 +95,13 @@
     <ClInclude Include="src\gui\pages\misc\misc.hpp">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\cheats.hpp">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
     <ClInclude Include="src\game\hooks.hpp">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\memory.hpp">
       <Filter>Header Files\game</Filter>
     </ClInclude>
     <ClInclude Include="src\game\offsets.hpp">
@@ -109,6 +115,7 @@
     </ClInclude>
     <ClInclude Include="src\project\functions.hpp">
       <Filter>Header Files\project</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ext\imgui\imgui.cpp">
@@ -164,6 +171,9 @@
     </ClCompile>
     <ClCompile Include="src\gui\pages\misc\misc.cpp">
       <Filter>Source Files\gui\pages</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\cheats.cpp">
+      <Filter>Source Files\game</Filter>
     </ClCompile>
     <ClCompile Include="src\game\hooks.cpp">
       <Filter>Source Files\game</Filter>
