@@ -25,6 +25,16 @@ namespace game
 		WriteBoolGlobal(offsets::bInfAmmo, enabled);
 	}
 
+	bool IsInfClips() noexcept
+	{
+		return ReadBoolGlobal(offsets::bInfClips);
+	}
+
+	void SetInfClips(const bool enabled) noexcept
+	{
+		WriteBoolGlobal(offsets::bInfClips, enabled);
+	}
+
 	bool IsInvisibleMode() noexcept
 	{
 		return ReadBoolGlobal(offsets::bInvisibleMode);

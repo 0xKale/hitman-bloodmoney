@@ -4,3 +4,5 @@
 !DirectX9 ImGui Base.sln
 !.vscode
 !.gitignore
+DirectX9 ImGui Base/Build/Intermediate/
+DirectX9 ImGui Base/Build/Corrupted.dll

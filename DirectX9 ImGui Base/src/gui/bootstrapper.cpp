@@ -2,6 +2,8 @@
 #include "gui.hpp"
 #include "pages/misc/misc.hpp"
 
+#include "../game/actions.hpp"
+
 #include <cstdio>
 #include <stdexcept>
 #include <intrin.h>
@@ -676,6 +678,8 @@ long __stdcall EndScene(IDirect3DDevice9* currentDevice) noexcept
 	{
 		gui::Render();
 	}
+
+	game::Tick();
 
 	ImGui::EndFrame();
 	ImGui::Render();
