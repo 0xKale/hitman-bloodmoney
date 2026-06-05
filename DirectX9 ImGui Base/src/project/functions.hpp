@@ -2,4 +2,5 @@
 
 namespace functions
 {
+	void cheatEnableMenu() noexcept;
 }
