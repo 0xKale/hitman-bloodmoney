@@ -7,13 +7,15 @@ namespace gui::pages
 {
 	void RenderPlayer() noexcept
 	{
-		ImGui::Checkbox("Enable Cheat Menu (C)", &vars::cheatMenu);
-		if (ImGui::IsItemDeactivatedAfterEdit())
+		if (ImGui::Checkbox("Enable Cheat Menu (C)", &vars::cheatMenu))
 		{
 			game::SetCheatsMenuEnabled(vars::cheatMenu);
 		}
 
-		ImGui::Checkbox("God Mode", &vars::bGodMode);
+		if (ImGui::Checkbox("God Mode", &vars::bGodMode))
+		{
+			game::SetGodMode(vars::bGodMode);
+		}
 		ImGui::SliderInt("FPS", &vars::iFPS, 30, 300);
 	}
 }
