@@ -1,4 +1,4 @@
-# Hitman D9Xc ImGui base menu
+# Hitman DirectX 9c ImGui base menu
 
 my fav game as a kid, so why not learn more how to reverse engineer games/programs on it?
 
