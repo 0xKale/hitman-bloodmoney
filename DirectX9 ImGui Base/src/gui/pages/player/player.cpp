@@ -15,7 +15,27 @@ namespace gui::pages
 
 		if (ImGui::Checkbox("God Mode", &vars::bGodMode))
 		{
+			if (vars::bGodMode && !vars::cheatMenu)
+			{
+				vars::cheatMenu = true;
+				game::SetCheatsMenuEnabled(true);
+			}
 			game::SetGodMode(vars::bGodMode);
+		}
+
+		if (vars::cheatMenu)
+		{
+			vars::bIsInvisible = game::IsInvisibleMode();
+		}
+
+		if (ImGui::Checkbox("Invisible Mode", &vars::bIsInvisible))
+		{
+			if (vars::bIsInvisible && !vars::cheatMenu)
+			{
+				vars::cheatMenu = true;
+				game::SetCheatsMenuEnabled(true);
+			}
+			game::SetInvisbleMode(vars::bIsInvisible);
 		}
 
 		if (ImGui::Checkbox("Infinite Ammo", &vars::bInfAmmo))

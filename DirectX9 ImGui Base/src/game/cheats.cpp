@@ -7,7 +7,7 @@ namespace game
 {
 	void SetCheatsMenuEnabled(const bool enabled) noexcept
 	{
-		WriteBoolGlobal(offsets::bCheatsMenuEnabled, enabled);
+		WriteIntGlobal(offsets::bCheatsMenuEnabled, enabled ? 1 : 0);
 	}
 
 	void SetGodMode(const bool enabled) noexcept
@@ -15,28 +15,33 @@ namespace game
 		WriteIntGlobal(offsets::bGodMode, enabled ? 1 : 0);
 	}
 
+	void SetInvisbleMode(const bool enabled) noexcept
+	{
+		WriteIntGlobal(offsets::bInvisibleMode, enabled ? 1 : 0);
+	}
+
 	bool IsInfAmmo() noexcept
 	{
-		return ReadBoolGlobal(offsets::bInfAmmo);
+		return ReadIntGlobal(offsets::bInfAmmo);
 	}
 
 	void SetInfAmmo(const bool enabled) noexcept
 	{
-		WriteBoolGlobal(offsets::bInfAmmo, enabled);
+		WriteIntGlobal(offsets::bInfAmmo, enabled ? 1 : 0);
 	}
 
 	bool IsInfClips() noexcept
 	{
-		return ReadBoolGlobal(offsets::bInfClips);
+		return ReadIntGlobal(offsets::bInfClips);
 	}
 
 	void SetInfClips(const bool enabled) noexcept
 	{
-		WriteBoolGlobal(offsets::bInfClips, enabled);
+		WriteIntGlobal(offsets::bInfClips, enabled ? 1 : 0);
 	}
 
 	bool IsInvisibleMode() noexcept
 	{
-		return ReadBoolGlobal(offsets::bInvisibleMode);
+		return ReadIntGlobal(offsets::bInvisibleMode);
 	}
 }

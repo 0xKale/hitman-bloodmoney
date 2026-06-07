@@ -4,6 +4,7 @@ namespace game
 {
 	void SetCheatsMenuEnabled(const bool enabled) noexcept;
 	void SetGodMode(const bool enabled) noexcept;
+	void SetInvisbleMode(const bool enabled) noexcept;
 	bool IsInfAmmo() noexcept;
 	void SetInfAmmo(const bool enabled) noexcept;
 	bool IsInfClips() noexcept;

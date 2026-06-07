@@ -7,6 +7,11 @@ namespace game
 {
 	inline uintptr_t GetModuleBase() noexcept
 	{
+		if (const HMODULE gameModule = GetModuleHandleA("hitmanbloodmoney.exe"))
+		{
+			return reinterpret_cast<uintptr_t>(gameModule);
+		}
+
 		return reinterpret_cast<uintptr_t>(GetModuleHandleA(nullptr));
 	}
 
