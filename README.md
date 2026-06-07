@@ -1,8 +1,11 @@
-# DX9c ImGui Base
+# Hitman D9Xc ImGui base menu
 
-Hitman D9Xc ImGui base menu
+my fav game as a kid, so why not learn more how to reverse engineer games/programs on it?
 
-my fav game as a kid, so why not learn more how to reverse engineer on it?
+IDA FREE 9.3
+Dumped memory with Scylla
+Cheat Engine for injecting memory vaules as test
+I use Zed btw
 
 ## Controls
 
