@@ -53,6 +53,16 @@ namespace gui::pages
 			game::RequestGiveAllItems();
 		}
 
+		if (ImGui::Button("Complete Mission"))
+		{
+			if (!vars::cheatMenu)
+			{
+				vars::cheatMenu = true;
+				game::SetCheatsMenuEnabled(true);
+			}
+			game::RequestCompleteLevel();
+		}
+
 		ImGui::SliderInt("FPS", &vars::iFPS, 30, 300);
 	}
 }

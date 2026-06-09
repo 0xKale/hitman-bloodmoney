@@ -25,5 +25,6 @@ namespace game
 		constexpr uintptr_t kMsgLine = 0x35;
 		constexpr uintptr_t strGiveAllItems = 0x39D8A8;
 		constexpr uintptr_t strCheatMenuCpp = 0x39D8BC;
+		constexpr uintptr_t fnCompleteLevel = 0x25ACB0;
 	}
 }
