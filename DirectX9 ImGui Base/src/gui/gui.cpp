@@ -37,6 +37,10 @@ namespace gui
 
 	void Render() noexcept
 	{
+		// Runs on the render thread (EndScene) so MenuTitle is only ever
+		// touched from one thread.
+		UpdateMenuTitle();
+
 		const std::string dynamicTitle = MenuTitle + "###MenuID";
 
 		const ImVec4 accent = ImVec4(

@@ -8,6 +8,7 @@
 #include "../../ext/mINI/ini.h"
 #include "../../ext/imgui/imgui.h"
 
+#include "../game/cheats.hpp"
 #include "../gui/pages/misc/misc.hpp"
 #include "../gui/pages/player/player.hpp"
 #include "../gui/pages/visuals/visuals.hpp"
@@ -120,6 +121,14 @@ bool config::Load()
 	{
 		gui::pages::ApplyTheme(vars::iTheme);
 	}
+
+	// Push the loaded state into the game so it matches the UI.
+	if (vars::bGodMode && !vars::cheatMenu)
+	{
+		vars::cheatMenu = true;
+		game::SetCheatsMenuEnabled(true);
+	}
+	game::SetGodMode(vars::bGodMode);
 
 	return true;
 }

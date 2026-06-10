@@ -35,12 +35,7 @@ namespace gui::pages
 				vars::cheatMenu = true;
 				game::SetCheatsMenuEnabled(true);
 			}
-			game::SetInvisbleMode(vars::bIsInvisible);
-		}
-
-		if (ImGui::Checkbox("Infinite Ammo", &vars::bInfAmmo))
-		{
-			game::SetInfAmmo(vars::bInfAmmo);
+			game::SetInvisibleMode(vars::bIsInvisible);
 		}
 
 		if (ImGui::Checkbox("Infinite Clips", &vars::bInfClips))

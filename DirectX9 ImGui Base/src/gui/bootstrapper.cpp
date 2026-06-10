@@ -373,15 +373,20 @@ bool EnsureDeviceBinding(IDirect3DDevice9* currentDevice) noexcept
 		return false;
 	}
 
-	D3DDEVICE_CREATION_PARAMETERS creationParams{};
-	if (FAILED(currentDevice->GetCreationParameters(&creationParams)))
+	// Re-resolving the window runs EnumWindows over every top-level window,
+	// so only do it when the cached one is gone.
+	if (window == nullptr || !IsWindow(window))
 	{
-		return false;
-	}
+		D3DDEVICE_CREATION_PARAMETERS creationParams{};
+		if (FAILED(currentDevice->GetCreationParameters(&creationParams)))
+		{
+			return false;
+		}
 
-	if (!TryReattachWindow(ResolveGameWindow(creationParams.hFocusWindow)))
-	{
-		return false;
+		if (!TryReattachWindow(ResolveGameWindow(creationParams.hFocusWindow)))
+		{
+			return false;
+		}
 	}
 
 	D3DVIEWPORT9 viewport{};
@@ -629,6 +634,10 @@ long __stdcall EndScene(IDirect3DDevice9* currentDevice) noexcept
 		return EndSceneOriginal(currentDevice);
 	}
 
+	// The first EndScene call after injection comes from a non-game call site
+	// (overlay/probe); remember it and never render for that caller. NOTE:
+	// this assumes the game itself is never the first caller — if the menu
+	// ever stops rendering entirely, this gate is the place to look.
 	static const auto returnAddress = _ReturnAddress();
 
 	const long result = EndSceneOriginal(currentDevice);
