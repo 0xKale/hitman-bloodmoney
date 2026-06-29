@@ -7,7 +7,7 @@ my fav game as a kid, so why not learn more how to reverse engineer games/progra
 - Cheat Engine for injecting memory vaules as test
 - I use Zed IDE btw
 
-- ~~There is a chance of game crashing using Complete Mission and Give All. However, they are extracted from the debug menu already in the game and it crashes within that menu too. I ain't fixing a 2006 game but it does work~~
+- ~~There is a chance of game crashing using Complete Mission and Give All two missions in a row. However, they are extracted from the debug menu already in the game and it crashes within that menu too. I ain't fixing a 2006 game but it does work~~
 
 Okay, I actually decided to fix the issue (what happens when you dont free pointers lol. nice coding io)
 
