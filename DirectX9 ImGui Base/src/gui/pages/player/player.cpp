@@ -43,8 +43,18 @@ namespace gui::pages
 			game::SetInfClips(vars::bInfClips);
 		}
 
+		if (ImGui::Checkbox("Infinite Ammo", &vars::bInfAmmo))
+		{
+			game::SetInfAmmo(vars::bInfAmmo);
+		}
+
 		if (ImGui::Button("Give All Items"))
 		{
+			if (!vars::cheatMenu)
+			{
+				vars::cheatMenu = true;
+				game::SetCheatsMenuEnabled(true);
+			}
 			game::RequestGiveAllItems();
 		}
 

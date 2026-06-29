@@ -7,5 +7,7 @@ namespace game
 	void SetInvisibleMode(const bool enabled) noexcept;
 	bool IsInfClips() noexcept;
 	void SetInfClips(const bool enabled) noexcept;
+	bool IsInfAmmo() noexcept;
+	void SetInfAmmo(const bool enabled) noexcept;
 	bool IsInvisibleMode() noexcept;
 }
