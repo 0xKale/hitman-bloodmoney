@@ -19,7 +19,7 @@ Okay, I actually decided to fix the issue (what happens when you dont free point
 - NEVER DETECTED
 - Infinite CLIPS/AMMO (Fixed)
 - Give All Weapons (Fixed game crashed caused by dangling pointer)
-- Instantly Complete Mission
+- Instantly Complete Mission (Also, fixed game crashed caused by dangling pointer)
 - More To Come
 
 
