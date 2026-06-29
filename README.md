@@ -13,6 +13,16 @@ Okay, I actually decided to fix the issue (what happens when you dont free point
 
 <img width="1024" height="576" alt="5911fa86ae653ad65b0c70f3" src="https://github.com/user-attachments/assets/bfed38a6-b72f-42fb-86c4-1d0b3ef6d118" />
 
+## Features
+- Enable In-Built Cheat Menu (Toggle with C)
+- GOD MODE
+- NEVER DETECTED
+- Infinite CLIPS/AMMO
+- Give All Weapons (Fixed)
+- Instantly Complete Mission
+- More To Come
+
+
 
 ## Controls
 
