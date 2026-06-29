@@ -18,7 +18,7 @@ Okay, I actually decided to fix the issue (what happens when you dont free point
 - GOD MODE
 - NEVER DETECTED
 - Infinite CLIPS/AMMO (Fixed)
-- Give All Weapons (Fixed game crashed caused by dangling pointer : thanks IO Interactive for buggy game)
+- Give All Weapons (Fixed game crashed caused by dangling pointer)
 - Instantly Complete Mission
 - More To Come
 
