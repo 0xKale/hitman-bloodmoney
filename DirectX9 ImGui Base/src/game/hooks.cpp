@@ -54,12 +54,19 @@ namespace game
 		{
 			giveAllTarget = target;
 		}
+
+		// Always-on hooks for "NPC One-Hit": tag 47 at his init and intercept
+		// ZHM3Actor::ApplyDamage so the toggle can make any hit lethal to NPCs while the
+		// player keeps normal health. The toggle only gates the lethal-damage swap.
+		InstallActorTracking();
 	}
 
 	void Destroy() noexcept
 	{
 		// Revert any code patches so ejecting (VK_END) leaves the game untouched.
 		SetInfAmmo(false);
+		SetNpcOneHp(false);
+		RemoveActorTracking();
 
 		if (giveAllTarget)
 		{

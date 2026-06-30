@@ -18,6 +18,16 @@ namespace game
 		constexpr uintptr_t bInfClips = 0x59A928;
 		constexpr uintptr_t bInvisibleMode = 0x59B840;
 
+		// "NPC One-Hit (1 HP)": make every non-player actor die from one hit. Hook 47's init
+		// (sub_5EAE10) to learn his pointer/vtable, and ZHM3Actor::ApplyDamage (sub_632EA0,
+		// VA 0x632EA0) - the choke point every hit funnels through: it does
+		// `*(float*)(actor+0x928) -= damage` (current combat HP @ +0x928, max @ +0x924). The
+		// detour swaps the real damage for a lethal value on any actor that is not 47, so a
+		// single shot kills NPCs while 47 takes the real damage. (Earlier guess +0x59C is a
+		// different value damage never writes - do NOT use it.)
+		constexpr uintptr_t fnHeroInit = 0x1EAE10;    // sub_5EAE10 (VA 0x5EAE10), 47 only
+		constexpr uintptr_t fnApplyDamage = 0x232EA0; // sub_632EA0 (VA 0x632EA0)
+
 		constexpr uintptr_t pRootManager = 0x41F83C;
 		constexpr uintptr_t pContextManager = 0x41F820;
 		constexpr uintptr_t kHandlerOffset = 0xA40;

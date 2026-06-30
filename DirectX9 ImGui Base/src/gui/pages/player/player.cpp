@@ -48,6 +48,17 @@ namespace gui::pages
 			game::SetInfAmmo(vars::bInfAmmo);
 		}
 
+		if (ImGui::Checkbox("NPC One-Hit (1 HP)", &vars::bNpcOneHp))
+		{
+			game::SetNpcOneHp(vars::bNpcOneHp);
+		}
+		if (ImGui::IsItemHovered())
+		{
+			ImGui::SetTooltip(
+				"Any hit kills an NPC - 47 keeps normal health.\n"
+				"Inject before loading a mission so the trainer can tag the player.");
+		}
+
 		if (ImGui::Button("Give All Items"))
 		{
 			if (!vars::cheatMenu)

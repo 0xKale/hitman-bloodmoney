@@ -7,6 +7,7 @@ namespace vars
 	inline bool bIsInvisible = false;
 	inline bool bInfClips = false;
 	inline bool bInfAmmo = false;
+	inline bool bNpcOneHp = false;
 	inline bool bNoClip = false;
 	inline int iFPS = 125;
 }

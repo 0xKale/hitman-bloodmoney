@@ -9,5 +9,9 @@ namespace game
 	void SetInfClips(const bool enabled) noexcept;
 	bool IsInfAmmo() noexcept;
 	void SetInfAmmo(const bool enabled) noexcept;
+	bool IsNpcOneHp() noexcept;
+	void SetNpcOneHp(const bool enabled) noexcept;
+	void InstallActorTracking() noexcept;
+	void RemoveActorTracking() noexcept;
 	bool IsInvisibleMode() noexcept;
 }
