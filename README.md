@@ -2,7 +2,7 @@
 
 my fav game as a kid, so why not learn more how to reverse engineer games/programs on it?
 
-- IDA FREE 9.1 Pro
+- IDA 9.1 Pro
 - Dumped memory with Scylla
 - Cheat Engine for injecting memory vaules as test
 - I use Zed IDE btw
